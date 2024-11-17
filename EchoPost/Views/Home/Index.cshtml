@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Main content -->
+        <div class="col-md-8">
+            <h2>Recent Posts</h2>
+            <div class="row">
+                @foreach (var post in Model.RecentPosts)
+                {
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@post.Title</h5>
+                                <p class="card-text">@post.Content.Substring(0, 100)...</p>
+                                <a href="/Post/Details/@post.Id" class="btn btn-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <h2>Popular Forums</h2>
+            <ul class="list-group">
+                @foreach (var forum in Model.PopularForums)
+                {
+                    <li class="list-group-item">
+                        <a href="/Forum/Details/@forum.Id">@forum.Name</a>
+                        <span class="badge bg-secondary">@forum.Posts.Count posts</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+

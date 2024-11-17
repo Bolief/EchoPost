@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="container mt-4">
+    <h2>@Model.Name</h2>
+    <p>@Model.Description</p>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Posts</h4>
+        <div>
+            <label for="sortOrder">Sort by:</label>
+            <select id="sortOrder" class="form-select form-select-sm" onchange="window.location.href='?sortOrder=' + this.value;">
+                <option value="date" selected>Date</option>
+                <option value="popularity">Popularity</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var post in Model.Posts)
+        {
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@post.Title</h5>
+                        <p class="card-text">@post.Content.Substring(0, 100)...</p>
+                        <a href="/Post/Details/@post.Id" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="container mt-4">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2>@Model.Title</h2>
+            <p>@Model.Content</p>
+            <small>Posted by @Model.User.UserName on @Model.CreatedAt</small>
+        </div>
+    </div>
+    <h4>Comments</h4>
+    <div class="list-group mb-4">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="list-group-item">
+                <h6>@comment.User.UserName</h6>
+                <p>@comment.Content</p>
+                <small>@comment.CreatedAt</small>
+            </div>
+        }
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-action="Comment" method="post">
+            <div class="mb-3">
+                <textarea name="Content" class="form-control" placeholder="Add a comment..." required></textarea>
+            </div>
+            <input type="hidden" name="PostId" value="@Model.Id" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    }
+    else
+    {
+        <p><a href="/Account/Login">Log in</a> to add a comment.</p>
+    }
+</div>
+
